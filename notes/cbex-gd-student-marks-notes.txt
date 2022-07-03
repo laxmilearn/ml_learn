@@ -1,0 +1,27 @@
+===
+init: element count = 10, iteration count = 1000, learning rate = 0.0002111
+iteration = 999: m = 874.5189187346385, b = 1.4657449463525958
+cost: prev = 876.0500910693186, curr = 874.5189187346385, diff = 1.5311723346800363
+===
+init: element count = 10, iteration count = 1000000, learning rate = 0.0002111, max_tolerant_cost= 50.0
+iteration = 3112: m = 49.973851346265604, b = 0.9806290505261995
+cost: prev = 50.006911923584425, curr = 49.973851346265604, diff = 0.03306057731882106
+break: reason = cost fell below max tolerant cost
+===
+init: element count = 10, iteration count = 1000000, learning rate = 0.0002111, max_tolerant_cost= 20.0
+cost: prev = 31.604511434069195, curr = 31.604511434064307, diff = 4.888534022029489e-12
+iteration = 393016: m = 31.604511334637564, b = 1.0177381982244798
+cost: prev = 31.60451133463755, curr = 31.604511334637564, diff = -1.4210854715202004e-14
+break: reason = cost is increasing
+===
+
+
+===
+
+
+===
+
+
+===
+
+
