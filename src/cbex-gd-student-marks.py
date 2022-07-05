@@ -1,6 +1,10 @@
+import os as var_os
 import math as var_math
+from xml.parsers.expat import model
 import numpy as var_numpy
 import pandas as var_pandas
+import pickle as var_pickle
+
 from sklearn import linear_model
 
 def gradient_descent(math, compsci, max_tolerant_cost):
@@ -60,17 +64,35 @@ def sklearn_gradient_descent(math, compsci):
     df = var_pandas.DataFrame({'math' : math, 'compsci' : compsci})
     var_model = linear_model.LinearRegression()
     var_model.fit(df[['math']], df.compsci)
-    return var_model.coef_, var_model.intercept_
+    return var_model
 
 # Main Code
+# Caculate Coeffecient (m) and Intercept (b) using Gradient Descent Algorithm
+
 # Data-Set-1
 math =   var_numpy.array([92,56,88,70,80,49,65,35,66,67])
 compsci = var_numpy.array([98,68,81,80,83,52,66,30,68,73])
 
-m_system,b_system=sklearn_gradient_descent(math,compsci)
-
+# Calculate With Custom Implementation
 m_custom,b_custom=gradient_descent(math, compsci, var_numpy.double(25.0))
 
+# Calculate With SciKit Learn Implementation
+model_system = sklearn_gradient_descent(math,compsci)
+m_system,b_system=model_system.coef_, model_system.intercept_
+
+# Save Model using Pickle
+repo_root_path = var_os.path.abspath(var_os.path.dirname(var_os.path.dirname(__file__)))
+model_file_path = repo_root_path + "/.outputs/.models/cbex-gd-student-marks-model.bindata"
+print ("Model File Path = {}".format(model_file_path))
+with open(model_file_path, "wb") as dump_file:
+    var_pickle.dump(model_system, dump_file)
+
+# Load Model using Pickle
+with open(model_file_path, "rb") as load_file:
+    model_loaded = var_pickle.load(load_file)
+m_loaded,b_loaded=model_loaded.coef_, model_loaded.intercept_
+
 print ("===== Results =====")
-print ("System: m = {}, b = {}".format(m_system,b_system))
 print ("Custom: m = {}, b = {}".format(m_custom,b_custom))
+print ("System: m = {}, b = {}".format(m_system,b_system))
+print ("Loaded: m = {}, b = {}".format(m_loaded,b_loaded))

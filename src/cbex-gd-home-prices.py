@@ -1,3 +1,4 @@
+import os as var_os
 import numpy as var_numpy
 import pandas as var_pandas
 
@@ -46,13 +47,13 @@ def gradient_descent(area, price, max_tolerant_cost):
         b_curr = b_curr - learning_rate * b_diff
 
 # Main Code
-# train_df = var_pandas.read_csv("../data/cbex-lr-home-prices-train.csv")
-# area = var_numpy.array(train_df.area)
-# price = var_numpy.array(train_df.price)
+repo_root_path = var_os.path.abspath(var_os.path.dirname(var_os.path.dirname(__file__)))
+train_data_file_path = repo_root_path + "data/cbex-lr-home-prices-train.csv"
 
 # Data-Set-1
-# area = var_numpy.array([1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000, 7000])
-# price = var_numpy.array([80000,135000,240000,325000,450000,560000,800000,945000,1100000,1250000,1400000])
+# train_df = var_pandas.read_csv(train_data_file_path)
+# area = var_numpy.array(train_df.area)
+# price = var_numpy.array(train_df.price)
 # Tuned Values for above tough data-set-1
 # learning_rate = 6.07733/(10**8)
 
