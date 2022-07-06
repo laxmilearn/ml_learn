@@ -1,10 +1,8 @@
 import os as var_os
 import math as var_math
-from xml.parsers.expat import model
 import numpy as var_numpy
 import pandas as var_pandas
 import pickle as var_pickle
-
 from sklearn import linear_model
 
 def gradient_descent(math, compsci, max_tolerant_cost):

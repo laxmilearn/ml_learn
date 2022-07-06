@@ -1,10 +1,12 @@
 import os as var_os
+import math as var_math
 import numpy as var_numpy
 import pandas as var_pandas
 
 def gradient_descent(area, price, max_tolerant_cost):
     m_curr = b_curr = 0.00
-    cost_curr = cost_prev = cost_diff = var_numpy.double(0.00)
+    cost_curr = var_numpy.double(0.00)
+    cost_prev = cost_diff = None
     num_elements = area.size
 
     num_iterations  = 100000000
@@ -21,7 +23,7 @@ def gradient_descent(area, price, max_tolerant_cost):
         cost_prev = cost_curr
         cost_curr = var_numpy.double((1/num_elements) * sum([value**2 for value in (price-predicted_price)]))
         if cost_prev == var_numpy.double(0.00): cost_prev = cost_curr
-        cost_diff =  cost_prev - cost_curr
+        if (cost_prev != None): cost_diff =  cost_prev - cost_curr
 
         # Print results
         if ((0 == i % print_diag_rate) or (i==num_iterations-1)):
@@ -29,16 +31,23 @@ def gradient_descent(area, price, max_tolerant_cost):
             print("cost: prev = {}, curr = {}, diff = {}".format(cost_prev, cost_curr, cost_diff))
 
         # Are we improving much, if not may be quit?
+        if (var_math.isclose(a=cost_prev, b=cost_curr,rel_tol=(10**-20))):
+            print("iteration = {}: m = {}, b = {}".format(i, cost_curr, m_curr, b_curr))
+            print("cost: prev = {}, curr = {}, diff = {}".format(cost_prev, cost_curr, cost_diff))
+            print("break: reason = cost is close")
+            return m_curr, b_curr
+
         if (cost_curr < max_tolerant_cost): 
             print("iteration = {}: m = {}, b = {}".format(i, cost_curr, m_curr, b_curr))
             print("cost: prev = {}, curr = {}, diff = {}".format(cost_prev, cost_curr, cost_diff))
             print("break: reason = cost fell below max tolerant cost")
-            break
+            return m_curr, b_curr
+
         if (cost_diff < 0): 
             print("iteration = {}: m = {}, b = {}".format(i, cost_curr, m_curr, b_curr))
             print("cost: prev = {}, curr = {}, diff = {}".format(cost_prev, cost_curr, cost_diff))
             print("break: reason = cost is increasing")
-            break
+            return m_curr, b_curr
 
         # Prepare for next iteration
         m_diff = -(2/num_elements) * sum(area*(price-predicted_price))
@@ -46,11 +55,14 @@ def gradient_descent(area, price, max_tolerant_cost):
         m_curr = m_curr - learning_rate * m_diff
         b_curr = b_curr - learning_rate * b_diff
 
+    # All iterations are done, return whatever we have
+    return m_curr, b_curr
+
 # Main Code
 repo_root_path = var_os.path.abspath(var_os.path.dirname(var_os.path.dirname(__file__)))
-train_data_file_path = repo_root_path + "data/cbex-lr-home-prices-train.csv"
 
 # Data-Set-1
+# train_data_file_path = repo_root_path + "/data/cbex-lr-home-prices-train.csv"
 # train_df = var_pandas.read_csv(train_data_file_path)
 # area = var_numpy.array(train_df.area)
 # price = var_numpy.array(train_df.price)
@@ -70,5 +82,5 @@ price = var_numpy.array([105000, 155000, 205000, 255000, 305000, 355000, 405000]
 # Should ideally reach m=100, b=500
 # learning_rate = 13.75/(10**8)
 
-gradient_descent(area, price, var_numpy.double(1000.0))
-
+m_result,b_result=gradient_descent(area, price, var_numpy.double(1000.0))
+print ("Result: Coefficient = {}, Intercept = {}".format(m_result, b_result))
