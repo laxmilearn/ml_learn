@@ -130,5 +130,8 @@ dmypy.json
 
 # Custom additions
 .vscode/
-.outputs/
+.outputs/.models/*
+!.outputs/.models/.placeholder
+.outputs/.predictions/*
+!.outputs/.predictions/.placeholder
 
