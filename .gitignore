@@ -134,4 +134,6 @@ dmypy.json
 !.outputs/.models/.placeholder
 .outputs/.predictions/*
 !.outputs/.predictions/.placeholder
+.outputs/.datasets/*
+!.outputs/.datasets/.placeholder
 
