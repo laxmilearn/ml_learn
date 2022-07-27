@@ -4,9 +4,9 @@
 
 ## Learning Avenues
 
-#### Courses by Dhaval 
+#### Courses by Dhaval
 https://www.youtube.com/c/codebasics/playlists
-https://www.youtube.com/playlist?list=PLeo1K3hjS3uvCeTYTeyfe0-rN5r8zn9rw
+Machine Learning: https://www.youtube.com/playlist?list=PLeo1K3hjS3uvCeTYTeyfe0-rN5r8zn9rw
 
 #### Open AI: DALL-E
 https://www.fast.ai/2022/07/21/dl-coders-22/
