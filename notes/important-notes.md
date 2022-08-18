@@ -14,6 +14,8 @@
 https://www.fast.ai/2022/07/21/dl-coders-22/
 
 ### Step-by-Step NN by Andrej Karpathy
+
+The spelled-out intro to neural networks and backpropagation: building micrograd
 - https://www.youtube.com/watch?v=VMj-3S1tku0
 
 
